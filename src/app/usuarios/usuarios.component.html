@@ -1,0 +1,104 @@
+<div class="container mt-5">
+  <div class="card rounded shadow">
+    <div class="card-body">
+      <h2 class="text-center">Usuarios</h2>
+      <form [formGroup]="usuarioForm" (ngSubmit)="editIndex !== null ? actualizarUsuario() : agregarUsuario()">
+        <div class="row">
+          <div class="col-12 col-md-6 mb-3">
+            <div class="form-group">
+              <label>Nombres</label>
+              <input formControlName="nombres" class="form-control" required>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <div class="form-group">
+              <label>Apellidos</label>
+              <input formControlName="apellidos" class="form-control" required>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <div class="form-group">
+              <label>Fecha de Nacimiento</label>
+              <input type="date" formControlName="fechaNacimiento" class="form-control" required>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <div class="form-group">
+              <label>Email</label>
+              <input formControlName="email" class="form-control" required>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <div class="form-group">
+              <label>Número de Documento</label>
+              <input formControlName="numeroDocumento" type="number" class="form-control" required>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <div class="form-group">
+              <label>Área</label>
+              <input formControlName="area" type="number" class="form-control" required>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <div class="form-group">
+              <label>Salario</label>
+              <input formControlName="salario" type="number" step="0.01" class="form-control" required>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <div class="form-group">
+              <label>Estado</label>
+              <select formControlName="estado" class="form-control" required>
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-rounded">{{ editIndex !== null ? 'Actualizar' : 'Agregar' }}</button>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="table-responsive">
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th>Imagen</th> 
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Email</th>
+          <th>Número de Documento</th>
+          <th>Área</th>
+          <th>Salario</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios; let i = index">
+          <td>
+            <img [src]="usuario.imagen" alt="Imagen de {{ usuario.nombres }}" class="img-thumbnail" style="width: 50px; height: 50px;">
+          </td>
+          <td>{{ usuario.nombres }}</td>
+          <td>{{ usuario.apellidos }}</td>
+          <td>{{ usuario.fechaNacimiento | date }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.numeroDocumento }}</td>
+          <td>{{ usuario.area }}</td>
+          <td>{{ usuario.salario | currency }}</td>
+          <td>{{ usuario.estado }}</td>
+          <td>
+            <button class="btn btn-warning btn-rounded" (click)="editarUsuario(i)">Editar</button>
+            <button class="btn btn-danger btn-rounded" (click)="eliminarUsuario(i)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
